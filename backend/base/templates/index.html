@@ -1,54 +1,15 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Products List</title>
-    <style>
-      body {
-        background: #dee7e8;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      }
-      .table-container,
-      .header {
-        max-width: 600px;
-        width: 100%;
-      }
-      .table-container {
-        border: 1px solid #ccc;
-      }
-      .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .table-container table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-
-      th,
-      td {
-        text-align: left;
-        padding: 1rem;
-      }
-      thead tr {
-        background: #e437b9;
-      }
-      tbody tr:nth-child(2n) {
-        background: #e8a8d8;
-      }
-      tbody tr:nth-child(odd) {
-        background: #fff;
-      }
-    </style>
   </head>
   <body>
+    {% block content %}
     <div class="header">
-      <h1>Product List in the DB</h1>
+      <h2>Product List in the DB</h2>
       <a href="{% url 'create' %}">Add new product</a>
     </div>
 
@@ -61,6 +22,7 @@
             <th>Production Date</th>
             <th>Expiry Date</th>
             <th>Edit Product</th>
+            <th>Delete Product</th>
           </tr>
         </thead>
         <tbody>
@@ -70,11 +32,17 @@
             <td data-cell="Product Name">{{product.product_name}}</td>
             <td data-cell="Production Date">{{product.production_date}}</td>
             <td data-cell="Expiry Date">{{product.expiry_date}}</td>
-            <td data-cell="Edit Product"><a href="{% url 'update' product.pk %}">Edit</a></td>
+            <td data-cell="Edit Product">
+              <a href="{% url 'update' product.pk %}">Edit</a>
+            </td>
+            <td data-cell="Delete Product">
+              <a href="{% url 'delete' product.pk %}">Delete</a>
+            </td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
+    {% endblock %}
   </body>
 </html>

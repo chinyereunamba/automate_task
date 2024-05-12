@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete {{product.product_name}}</title>
+    <style>
+        p {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete <b>{{product.product_name}}</b>?</p>
+        <div class="button-set">
+            <button type="submit">Yes, I'm sure</button>
+            <a href="{% url 'home' %}">No, take me back</a>
+        </div>
+    </form>
+</body>
+
+</html>
+{%endblock%}
