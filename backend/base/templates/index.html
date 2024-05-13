@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,7 +7,6 @@
     <title>Products List</title>
   </head>
   <body>
-    {% block content %}
     <div class="header">
       <h2>Product List in the DB</h2>
       <a href="{% url 'create' %}">Add new product</a>
@@ -43,6 +42,6 @@
         </tbody>
       </table>
     </div>
-    {% endblock %}
   </body>
 </html>
+{% endblock %}

@@ -1,14 +1,39 @@
 from django.shortcuts import render, redirect
 from .models import Product
-from .forms import ProductForm
+from .forms import ProductForm, CreateUserForm
 
 # Create your views here.
 
 
 def home(request):
-    model = Product.objects.all()
-    context = {"products": model}
+    if request.user.is_authenticated:
+        model = Product.objects.filter(user=request.user)
+        context = {"products": model}
+    else:
+        return redirect("/login")
     return render(request, "index.html", context)
+
+
+def login(request):
+    if request.method=="POST":
+        username = request.POST.get['username']
+        password = request.POST.get['password']
+
+        # user = 
+    context = {}
+    return render(request, "login.html", context)
+
+
+def register(request):
+    form = CreateUserForm()
+    if request.method == "POST":
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/login")
+    context = {"form": form}
+
+    return render(request, "register.html", context)
 
 
 def create_form(request):
